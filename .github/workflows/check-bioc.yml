@@ -177,6 +177,11 @@ jobs:
           ## https://github.com/r-lib/remotes/issues/296
           ## Ideally, all dependencies should get installed in the first pass.
 
+          ## Workaround for problems with cached S4objects in binary packages
+          BiocManager::install("GenomeInfoDb", force = TRUE, type = "source")
+          BiocManager::install("S4Vectors", force = TRUE, type = "source")
+          BiocManager::install("SummarizedExperiment", force = TRUE, type = "source")
+
           ## Pass #1 at installing dependencies
           BiocManager::install("RforMassSpectrometry/MsCoreUtils")
           BiocManager::install(c("ncdf4", "mzR"))

@@ -186,8 +186,7 @@ jobs:
           BiocManager::install("RforMassSpectrometry/MsCoreUtils")
           BiocManager::install(c("ncdf4", "mzR"))
           message(paste('****', Sys.time(), 'pass number 1 at installing dependencies: local dependencies ****'))
-          remotes::install_local(dependencies = TRUE, repos =
-          BiocManager::repositories(), build_vignettes = FALSE, upgrade = TRUE)
+          remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = FALSE, upgrade = TRUE, type = "source")
 
           BiocManager::install(c("rmarkdown", "BiocStyle"))
         continue-on-error: true
@@ -197,19 +196,12 @@ jobs:
         run: |
           ## Pass #2 at installing dependencies
           message(paste('****', Sys.time(), 'pass number 2 at installing dependencies: any remaining dependencies ****'))
-          remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = FALSE, upgrade = TRUE)
+          remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = FALSE, upgrade = TRUE, type = "source")
 
           ## Manually install packages that seem to be skipped.
           message(paste('****', Sys.time(), 'force installation of selected packages  ****'))
           BiocManager::install(c("faahKO"))
-          BiocManager::install("ProtGenerics")
-          BiocManager::install("MSnbase")
-          BiocManager::install("mzR", type = "source", force = TRUE)
-          BiocManager::install("Spectra")
-          BiocManager::install("MsBackendMgf")
-          BiocManager::install("MetaboCoreUtils")
           BiocManager::install("magick")
-          BiocManager::install("RforMassSpectrometry/MsExperiment")
 
           ## For running the checks
           message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))

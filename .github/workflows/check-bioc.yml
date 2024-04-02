@@ -198,6 +198,7 @@ jobs:
 
           ## Manually install packages that seem to be skipped.
           message(paste('****', Sys.time(), 'force installation of selected packages  ****'))
+          BiocManager::install("RforMassSpectrometry/MsCoreUtils", force = TRUE)
           BiocManager::install("xcms", type = "source")
           BiocManager::install("faahKO", type = "source", force = TRUE)
           BiocManager::install("magick")

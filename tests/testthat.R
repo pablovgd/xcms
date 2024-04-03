@@ -4,6 +4,8 @@ library(faahKO)
 library(MSnbase)
 library(msdata)
 library(BiocParallel)
+prm <- SerialParam()
+
 register(SerialParam())
 
 ## Create some objects we can re-use in different tests:
@@ -79,5 +81,3 @@ ref_mz_rt <- featureDefinitions(ref)[, c("mzmed","rtmed")]
 tst <- loadXcmsData("faahko_sub2")
 
 test_check("xcms")
-
-bpstop(prm)

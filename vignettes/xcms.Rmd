@@ -1293,7 +1293,7 @@ laboratories and over time, the same samples may result in variation in
 retention time, especially because the LC system can be quite unstable. In these
 cases, an alignment step using the `adjustRtime()` function with the
 `LamaParam` parameter can allow the user to perform this type of alignment.
-We will go through this step by step below. 
+We will go through this step by step below.
 
 Let's load an already analyzed dataset `ref` and our previous dataset before
 alignment, which will be `tst`. We will first restrict their retention time
@@ -1307,10 +1307,10 @@ tst <- loadXcmsData("faahko_sub2")
 Now, we will attempt to align these two samples with the previous dataset. The
 first step is to extract landmark features (referred to as `lamas`). To achieve
 this, we will identify the features present in every QC sample of the `ref`
-dataset. To do so, we will categorize (using `factor()`) our data by 
+dataset. To do so, we will categorize (using `factor()`) our data by
 `sample_type` and only retain the QC samples. This variable will be utilized to
-filter the features using the `PercentMissingFilter()` parameter within the 
-`filterFeatures()` function (see section above for more information on this 
+filter the features using the `PercentMissingFilter()` parameter within the
+`filterFeatures()` function (see section above for more information on this
 method)
 
 ```{r}
@@ -1318,7 +1318,7 @@ f <- sampleData(ref)$sample_type
 f[f != "QC"] <- NA
 ref <- filterFeatures(ref, PercentMissingFilter(threshold = 0, f = f))
 ref_mz_rt <- featureDefinitions(ref)[, c("mzmed","rtmed")]
-ref_mz_rt
+head(ref_mz_rt)
 ```
 
 This is what the `lamas` input should look like for alignment. In terms of
@@ -1404,16 +1404,16 @@ chromatographic peaks along with the fitted model line.
 ```{r}
 #access summary of matches and model information
 summary <- summarizeLamaMatch(param)
-summary 
+summary
 
 # coverage for each file
 summary$Matched_peaks / summary$Total_peaks * 100
 
-#access the information on the model of for the first file 
+#access the information on the model of for the first file
 summary$model_summary[[1]]
 
-# Plot obs vs. ref with fitting line 
-plot(param, index = 1L, main = "ChromPeaks versus Lamas for the first file", 
+# Plot obs vs. ref with fitting line
+plot(param, index = 1L, main = "ChromPeaks versus Lamas for the first file",
      colPoint = "red")
 ```
 

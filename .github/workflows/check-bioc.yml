@@ -179,6 +179,7 @@ jobs:
 
           ## Workaround for problems with cached S4objects in binary packages
           BiocManager::install("GenomeInfoDb", force = TRUE, type = "source")
+          BiocManager::install("BiocParallel", force = TRUE, type = "source")
           BiocManager::install("S4Vectors", force = TRUE, type = "source")
           BiocManager::install("SummarizedExperiment", force = TRUE, type = "source")
 

@@ -84,7 +84,8 @@ Suggests:
     multtest,
     MsBackendMgf,
     signal,
-    mgcv
+    mgcv,
+    RCurl
 Enhances:
     Rgraphviz,
     rgl

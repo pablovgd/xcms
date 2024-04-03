@@ -202,6 +202,8 @@ jobs:
           BiocManager::install("xcms", type = "source")
           BiocManager::install("faahKO", type = "source", force = TRUE)
           BiocManager::install("magick", type = "source")
+          BiocManager::install("RCurl", type = "source", force = TRUE)
+          BiocManager::install("mzR")
 
           ## For running the checks
           message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))

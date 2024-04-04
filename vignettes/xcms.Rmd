@@ -1323,6 +1323,7 @@ f[f != "QC"] <- NA
 ref <- filterFeatures(ref, PercentMissingFilter(threshold = 0, f = f))
 ref_mz_rt <- featureDefinitions(ref)[, c("mzmed","rtmed")]
 head(ref_mz_rt)
+nrow(ref_mz_rt)
 ```
 
 This is what the `lamas` input should look like for alignment. In terms of
@@ -1396,29 +1397,45 @@ abline(v = mtch[[1]]$obs)
 ```
 
 The overlay of BPC above provides insight into the correlation between accurate
-alignment and the presence of peaks matching with `lamas.` Furthermore, a more
-detailed examination of the matching and the model used for fitting each file
-is possible. Numerical information can be obtained using the
+alignment and the presence of peaks matching with `lamas`. For this particular
+sample no chromatographic peaks were matched to the `lamas`  between 2500 and
+3000 seconds and hence the alignment in that region was not good. For the second
+file, chrom peaks could also be matched in that region resulting in a better
+alignment.
+
+```{r}
+par(mfrow = c(1, 1))
+plot(bpc[1, 2], col = "#00000080", main = "Distribution CP matched to Lamas")
+points(rtime(bpc_tst_adj[1, 2]), intensity(bpc_tst_adj[1, 2]), type = "l",
+       col = "#0000ff80")
+grid()
+abline(v = mtch[[2]]$obs)
+```
+
+Furthermore, a more detailed examination of the matching and the model used for
+fitting each file is possible. Numerical information can be obtained using the
 `summarizeLamaMatch()` function. From this, the percentage of chromatographic
 peaks utilized for alignment can be computed relative to the total number of
-peaks in the file. Additionally, it is feasible to directly `plot()` the
-`param` object for the file of interest, showcasing the distribution of these
+peaks in the file. Additionally, it is feasible to directly `plot()` the `param`
+object for the file of interest, showcasing the distribution of these
 chromatographic peaks along with the fitted model line.
 
 ```{r}
-#access summary of matches and model information
+#' access summary of matches and model information
 summary <- summarizeLamaMatch(param)
 summary
 
-# coverage for each file
+#' coverage for each file
 summary$Matched_peaks / summary$Total_peaks * 100
 
-#access the information on the model of for the first file
+#' access the information on the model of for the first file
 summary$Model_summary[[1]]
 
-# Plot obs vs. ref with fitting line
+#' Plot obs vs. ref with fitting line
 plot(param, index = 1L, main = "ChromPeaks versus Lamas for the first file",
      colPoint = "red")
+abline(0, 1, lty = 3, col = "grey")
+grid()
 ```
 
 

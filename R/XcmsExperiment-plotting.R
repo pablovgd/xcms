@@ -405,3 +405,28 @@ setMethod(
         }
     }
 }
+
+#' @title General visualization of precursor ions of a LC-MS/MS data file
+#'
+#' Simple visualization of the position of fragment spectra's precursor ion
+#' in the MS1 retention time by m/z area.
+#'
+#' @param x `MsExperiment` of LC-MS/MS data.
+#'
+#' @param sampleIndex `integer(1L)` defining the sample from
+#'
+plotPrecursorIons <- function(x, sampleIndex = 1L, pch = 21, col = "#00000080",
+                              bg = "#00000020", xlab = "retention time",
+                              ylab = "m/z", ...) {
+    x_sub <- x[sampleIndex]
+    rtr <- range(rtime(spectra(x_sub)))
+    mzr <- range(range(mz(spectra(x_sub))))
+    pmz <- precursorMz(spectra(x_sub))
+    prt <- rtime(spectra(x_sub)[!is.na(pmz)])
+    pint <- precursorIntensity(spectra(x_sub)[!is.na(pmz)])
+    pmz <- pmz[!is.na(pmz)]
+    mn <- basename(dataOrigin(spectra(x_sub)[1L]))
+    plot(prt, pmz, xlim = rtr, ylim = mzr, pch = pch, col = col, bg = bg,
+         xlab = xlab, ylab = ylab, main = mn, ...)
+    grid()
+}

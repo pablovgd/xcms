@@ -206,6 +206,9 @@
 #' - `plotChromPeaks`: indicate identified chromatographic peaks from one
 #'   sample in the RT-m/z space. See [plotChromPeaks()] for details.
 #'
+#' - `plotPrecursorIons`: general visualization of precursor ions of
+#'   LC-MS/MS data. See [plotPrecursorIons()] for details.
+#'
 #' - `refineChromPeaks`: *refines* identified chromatographic peaks in `object`.
 #'   See [refineChromPeaks()] for details.
 #'

@@ -1,5 +1,9 @@
 # xcms 4.1
 
+## Changes in version 4.1.13
+
+- Add `plotPrecursorIons()` function.
+
 ## Changes in version 4.1.12
 
 - Implementation of the `LamaParama` class and method for the `adjustRtime()`

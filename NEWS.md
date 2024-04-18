@@ -1,8 +1,15 @@
 # xcms 4.1
 
-## Changes in version 4.1.13
+## Changes in version 4.1.14
 
 - Add `plotPrecursorIons()` function.
+
+## Changes in version 4.1.13
+
+- Add parameter `rtimeDifferenceThreshold` to `ObiwarpParam` allowing to
+  customize the threshold used by obiwarp to determine whether *gaps* are
+  present in the sequence of retention times of a sample. This addresses/fixes
+  issue #739.
 
 ## Changes in version 4.1.12
 

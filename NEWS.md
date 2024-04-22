@@ -2,6 +2,11 @@
 
 ## Changes in version 4.1.13
 
+- Fix for issue #734. XIC plot is is now working with MS2 Data.
+  
+
+## Changes in version 4.1.13
+
 - Add parameter `rtimeDifferenceThreshold` to `ObiwarpParam` allowing to
   customize the threshold used by obiwarp to determine whether *gaps* are
   present in the sequence of retention times of a sample. This addresses/fixes

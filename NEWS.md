@@ -2,6 +2,8 @@
 
 ## Changes in version 4.1.14
 
+- Support excluding samples or sample groups from defining features with
+  *PeakDensity* correspondence analysis (issue #742).
 - Add `plotPrecursorIons()` function.
 
 ## Changes in version 4.1.13

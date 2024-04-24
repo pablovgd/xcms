@@ -450,6 +450,11 @@ setMethod(
 #' pest_dda <- readMsExperiment(fl)
 #'
 #' plotPrecursorIons(pest_dda)
+#' grid()
+#'
+#' ## Subset the data object to plot the data specifically for one or
+#' ## selected file/sample:
+#' plotPrecursorIons(pest_dda[1L])
 plotPrecursorIons <- function(x, pch = 21, col = "#00000080",
                               bg = "#00000020", xlab = "retention time",
                               ylab = "m/z", main = character(), ...) {
@@ -468,6 +473,5 @@ plotPrecursorIons <- function(x, pch = 21, col = "#00000080",
             main <- basename(dataOrigin(spectra(x_sub)[1L]))
         plot(prt, pmz, xlim = rtr, ylim = mzr, pch = pch, col = col, bg = bg,
              xlab = xlab, ylab = ylab, main = main[1L], ...)
-        grid()
     }
 }

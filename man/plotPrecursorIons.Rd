@@ -49,6 +49,11 @@ fl <- system.file("TripleTOF-SWATH", "PestMix1_DDA.mzML", package = "msdata")
 pest_dda <- readMsExperiment(fl)
 
 plotPrecursorIons(pest_dda)
+grid()
+
+## Subset the data object to plot the data specifically for one or
+## selected file/sample:
+plotPrecursorIons(pest_dda[1L])
 }
 \author{
 Johannes Rainer

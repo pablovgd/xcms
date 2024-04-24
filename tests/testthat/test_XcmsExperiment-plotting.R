@@ -4,6 +4,7 @@ df <- data.frame(mzML_file = basename(fls),
                  dataOrigin = fls,
                  sample = c("ko15", "ko16", "ko18"))
 mse <- readMsExperiment(spectraFiles = fls, sampleData = df)
+mse_ms2 <- readMsExperiment(msdata::proteomics(full.names=TRUE)[4])
 p <- CentWaveParam(noise = 10000, snthresh = 40, prefilter = c(3, 10000))
 xmse <- findChromPeaks(mse, param = p)
 pdp <- PeakDensityParam(sampleGroups = rep(1, 3))
@@ -63,4 +64,9 @@ test_that("plotPrecursorIons works", {
                       package = "msdata")
     a <- readMsExperiment(fl)
     plotPrecursorIons(a)
+})
+
+test_that(".xmse_plot_xic works with ms2 data", {
+  tmp <-  filterMz(filterRt(mse_ms2, rt= c(2160, 2190)), mz = c(990,1000))
+  plot(tmp)
 })

@@ -1,10 +1,13 @@
-# xcms 4.1
+# xcms 4.3
 
-## Changes in version 4.1.15
+## Changes in version 4.3.1
 
 - Support excluding samples or sample groups from defining features with
   *PeakDensity* correspondence analysis (issue #742).
 - Add `plotPrecursorIons()` function.
+
+
+# xcms 4.1
 
 ## Changes in version 4.1.14
 

@@ -5,6 +5,8 @@
 - Support excluding samples or sample groups from defining features with
   *PeakDensity* correspondence analysis (issue #742).
 - Add `plotPrecursorIons()` function.
+- Fix in `dropFeatureDefinitions()` that was not correctly removing additional
+  metadata from gap-filled chromatographic peaks.
 
 
 # xcms 4.1

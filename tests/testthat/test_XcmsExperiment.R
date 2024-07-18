@@ -1413,17 +1413,6 @@ test_that("setAs,XcmsExperiment,xcmsSet works", {
     expect_equal(peaks(res), chromPeaks(xmseg))
 })
 
-test_that("storeResults,RDataParam works", {
-    param <- RDataParam(fileName = "test")
-    param2 <- RDataParam()
-    expect_false(is.null(param2))
-    storeResults(xmse, param = param)
-    expect_true(file.exists("test"))
-    load("test")
-    expect_s4_class(object, "XcmsExperiment")
-    expect_equal(object, xmse)
-})
-
 test_that("fillChromPeaks,XcmsExperiment works with verboseBetaColumns", {
     p <- CentWaveParam(noise = 10000, snthresh = 40, prefilter = c(3, 10000),
                        verboseBetaColumns = TRUE)

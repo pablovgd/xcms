@@ -1,5 +1,10 @@
 # xcms 4.3
 
+## Changes in version 4.3.2
+
+- Remove data/results import/export functionality as it is being developed in
+  the *MsIO* package.
+
 ## Changes in version 4.3.1
 
 - Support excluding samples or sample groups from defining features with

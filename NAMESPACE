@@ -72,6 +72,7 @@ importMethodsFrom("MSnbase", "intensity", "mz", "rtime", "fileNames", "fromFile"
 importFrom("MSnbase", "as.data.frame.Spectrum", "Chromatogram",
     "MChromatograms", "MSpectra", "requiredFvarLabels", "selectFeatureData")
 
+
 export(
     "etg",
     "medianFilter",
@@ -254,7 +255,8 @@ export(
     "loadXcmsData",
     "matchLamasChromPeaks",
     "summarizeLamaMatch",
-    "matchedRtimes"
+    "matchedRtimes",
+    "XcmsExperiment"
 )
 
 ## New analysis methods
@@ -566,7 +568,7 @@ importMethodsFrom("Spectra", "precursorMz")
 importMethodsFrom("Spectra", "$")
 importMethodsFrom("Spectra", "uniqueMsLevels")
 importMethodsFrom("Spectra", "backendBpparam")
-importFrom("Spectra", "MsBackendMemory")
+importFrom("Spectra", "MsBackendMemory", "filterEmptySpectra")
 
 ## MsExperiment things
 importClassesFrom("MsExperiment", "MsExperiment")

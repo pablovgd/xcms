@@ -1,5 +1,10 @@
 # xcms 4.3
 
+## Changes in version 4.3.3
+
+- Support coercing from `XcmsExperiment` to `XCMSnExp` with
+  `as(object, "XCMSnExp")`.
+
 ## Changes in version 4.3.2
 
 - Remove data/results import/export functionality as it is being developed in

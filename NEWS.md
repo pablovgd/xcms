@@ -4,6 +4,8 @@
 
 - Support coercing from `XcmsExperiment` to `XCMSnExp` with
   `as(object, "XCMSnExp")`.
+- Change `estimatePrecursorIntensity()` to a method and add an implementation
+  for `MsExperiment` objects.
 
 ## Changes in version 4.3.2
 

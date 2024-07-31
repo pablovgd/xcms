@@ -4,7 +4,8 @@ import("methods")
 importMethodsFrom("ProtGenerics", "peaks", "chromatogram", "writeMSData",
     "polarity<-", "centroided", "isCentroided", "peaks<-",
     "isolationWindowTargetMz", "quantify", "bin", "spectrapply",
-    "filterFeatures", "filterMzRange", "filterRt", "filterMz", "filterMsLevel")
+    "filterFeatures", "filterMzRange", "filterRt", "filterMz", "filterMsLevel",
+    "estimatePrecursorIntensity")
 importClassesFrom("ProtGenerics", "Param")
 importFrom("BiocGenerics", "updateObject", "fileName", "subset",
     "dirname", "dirname<-")
@@ -250,7 +251,6 @@ export(
     "hasFilledChromPeaks",
     "plotAdjustedRtime",
     "groupOverlaps",
-    "estimatePrecursorIntensity",
     "featureArea",
     "loadXcmsData",
     "matchLamasChromPeaks",
@@ -263,6 +263,7 @@ export(
 exportMethods(
     "showError",
     "findChromPeaks",
+    "estimatePrecursorIntensity",
     "groupChromPeaks",
     "adjustRtime",
     "findChromPeaksIsolationWindow",
@@ -568,6 +569,7 @@ importMethodsFrom("Spectra", "precursorMz")
 importMethodsFrom("Spectra", "$")
 importMethodsFrom("Spectra", "uniqueMsLevels")
 importMethodsFrom("Spectra", "backendBpparam")
+importMethodsFrom("Spectra", "estimatePrecursorIntensity")
 importFrom("Spectra", "MsBackendMemory", "filterEmptySpectra")
 
 ## MsExperiment things

@@ -203,6 +203,7 @@ test_that(".features_ms_region works", {
 })
 
 test_that(".xcms_experiment_to_xcms_n_exp works", {
+    library(MsExperiment)
     a <- XcmsExperiment()
     res <- xcms:::.xcms_experiment_to_xcms_n_exp(a)
     expect_s4_class(res, "XCMSnExp")

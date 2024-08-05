@@ -1168,8 +1168,9 @@ XcmsExperiment <- function() {
                             files = fileNames(from),
                             smoothed = NA)
     n@phenoData <- new("NAnnotatedDataFrame", as.data.frame(sampleData(from)))
-    fd <- as.data.frame(MsExperiment::spectra(from)@backend@spectraData)
-    fd$fileIdx <- match(fd$dataStorage, unique(fd$dataStorage))
+    fd <- as.data.frame(from@spectra@backend@spectraData)
+    fnames <- unique(fd$dataStorage)
+    fd$fileIdx <- match(fd$dataStorage, fnames)
     fd <- fd[, !colnames(fd) %in% c("dataStorage", "dataOrigin")]
     colnames(fd) <- sub("scanIndex", "spIdx", colnames(fd))
     colnames(fd) <- sub("rtime", "retentionTime", colnames(fd))
@@ -1180,13 +1181,18 @@ XcmsExperiment <- function() {
                                   fd$fileIdx, fd$spIdx,
                                   max(fd$fileIdx), max(fd$spIdx))
     n@featureData <- new("AnnotatedDataFrame", fd)
-    nf <- length(fileNames(from))
+    nf <- length(fnames)
     n@experimentData <- new("MIAPE",
                             instrumentManufacturer = rep(NA_character_, nf),
                             instrumentModel = rep(NA_character_, nf),
                             ionSource = rep(NA_character_, nf),
                             analyser = rep(NA_character_, nf),
                             detectorType = rep(NA_character_, nf))
+    n@processingData <- new("MSnProcess",
+                            processing = paste0("Coercion from ",
+                                                class(from)[1L],
+                                                " [", date(), "]"),
+                            files = fnames)
     ## -> XCMSnExp
     if (hasChromPeaks(from)) {
         chromPeaks(m) <- chromPeaks(from)

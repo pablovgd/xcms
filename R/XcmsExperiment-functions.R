@@ -1168,8 +1168,8 @@ XcmsExperiment <- function() {
                             files = fileNames(from),
                             smoothed = NA)
     n@phenoData <- new("NAnnotatedDataFrame", as.data.frame(sampleData(from)))
-    fd <- as.data.frame(spectra(from)@backend@spectraData)
-    fd$fileIdx <- match(fd$dataStorage, fileNames(from))
+    fd <- as.data.frame(MsExperiment::spectra(from)@backend@spectraData)
+    fd$fileIdx <- match(fd$dataStorage, unique(fd$dataStorage))
     fd <- fd[, !colnames(fd) %in% c("dataStorage", "dataOrigin")]
     colnames(fd) <- sub("scanIndex", "spIdx", colnames(fd))
     colnames(fd) <- sub("rtime", "retentionTime", colnames(fd))

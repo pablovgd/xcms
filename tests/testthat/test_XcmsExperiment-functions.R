@@ -210,7 +210,7 @@ test_that(".xcms_experiment_to_xcms_n_exp works", {
 
     a <- loadXcmsData("xmse")
     a1 <- a[1]
-    a1@spectra <- Spectra::setBackend(spectra(a1), MsBackendMemory())
+    a1@spectra <- Spectra::setBackend(spectra(a1), Spectra::MsBackendMemory())
     expect_error(xcms:::.xcms_experiment_to_xcms_n_exp(a1), "MsBackendMzR")
 
     res <- xcms:::.xcms_experiment_to_xcms_n_exp(a)

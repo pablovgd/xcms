@@ -1,5 +1,11 @@
 # xcms 4.3
 
+## Changes in version 4.3.4
+
+- Fix issue #755: `chromatogram()` with `msLevel = 2` fails to extract
+  chromatographic data if `isolationWindowTargetMz` is not specified or
+  available (e.g. for MSe data).
+
 ## Changes in version 4.3.3
 
 - Support coercing from `XcmsExperiment` to `XCMSnExp` with

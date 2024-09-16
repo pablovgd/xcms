@@ -31,8 +31,10 @@
 #' @return
 #'
 #' If called on a `Chromatogram` object, the method returns an [XChromatogram]
-#' object with the identified peaks. See [peaksWithCentWave()] for details on
-#' the peak matrix content.
+#' object with the identified peaks. Columns `"mz"`, `"mzmin"` and `"mzmax"` in
+#' the `chromPeaks()` peak matrix provide the mean m/z and the maximum and
+#' minimum m/z value of the `Chromatogram` object. See [peaksWithCentWave()]
+#' for details on the remaining columns.
 #'
 #' @seealso [peaksWithCentWave()] for the downstream function and [centWave]
 #'     for details on the method.
@@ -70,9 +72,17 @@ setMethod("findChromPeaks", signature(object = "Chromatogram",
                                            rt = rtime(object)),
                                       as(param, "list")))
               object <- as(object, "XChromatogram")
-              chromPeaks(object) <- res
+              chromPeaks(object) <- .add_mz(res, object@mz)
               object
           })
+
+.add_mz <- function(x, mz = c(NA_real_, NA_real_)) {
+    nx <- nrow(x)
+    tmp <- cbind(mz = rep(mean(mz), nx),
+                 mzmin = rep(mz[1L], nx),
+                 mzmax = rep(mz[2L], nx))
+    cbind(tmp, x)
+}
 
 #' @title matchedFilter-based peak detection in purely chromatographic data
 #'
@@ -97,8 +107,10 @@ setMethod("findChromPeaks", signature(object = "Chromatogram",
 #' @return
 #'
 #' If called on a `Chromatogram` object, the method returns a `matrix` with
-#' the identified peaks. See [peaksWithMatchedFilter()] for details on the
-#' matrix content.
+#' the identified peaks. Columns `"mz"`, `"mzmin"` and `"mzmax"` in
+#' the `chromPeaks()` peak matrix provide the mean m/z and the maximum and
+#' minimum m/z value of the `Chromatogram` object. See
+#' [peaksWithMatchedFilter()] for details on the remaining columns.
 #'
 #' @seealso [peaksWithMatchedFilter()] for the downstream function and
 #'     [matchedFilter] for details on the method.
@@ -134,7 +146,7 @@ setMethod("findChromPeaks", signature(object = "Chromatogram",
                                            rt = rtime(object)),
                                       as(param, "list")))
               object <- as(object, "XChromatogram")
-              chromPeaks(object) <- res
+              chromPeaks(object) <- .add_mz(res, object@mz)
               object
           })
 

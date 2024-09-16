@@ -1,5 +1,11 @@
 # xcms 4.3
 
+## Changes in version 4.3.4
+
+- Address issue #765: peak detection on chromatographic data: report a
+  chromatogram's `"mz"`, `"mzmin"` and `"mzmax"` as the mean m/z and lower and
+  upper m/z in the `chromPeaks()` matrix.
+
 ## Changes in version 4.3.3
 
 - Fix issue #755: `chromatogram()` with `msLevel = 2` fails to extract

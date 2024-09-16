@@ -28,10 +28,13 @@ setMethod("show", "XChromatogram", function(object) {
 #'   retention time range for which peaks should be returned along with
 #'   parameter `type` that defines how *overlapping* is defined (parameter
 #'   description for details). For `XChromatogram` objects the function returns
-#'   a `matrix` with columns `"rt"` (retention time of the peak apex),
-#'   `"rtmin"` (the lower peak boundary), `"rtmax"` (the upper peak boundary),
-#'   `"into"` (the ingegrated peak signal/area of the peak), `"maxo"` (the
-#'   maximum instensity of the peak and `"sn"` (the signal to noise ratio).
+#'   a `matrix` with columns `"mz"` (mean m/z value), `"mzmin"` (minimal m/z
+#'   value) and `"mzmax"` (maximal m/z value), `"rt"` (retention time of the
+#'   peak apex), `"rtmin"` (the lower peak boundary in retention time
+#'   dimension), `"rtmax"` (the upper peak boundary in retention time
+#'   dimension), `"into"` (the ingegrated peak signal/area of the peak),
+#'   `"maxo"` (the maximum instensity of the peak and `"sn"` (the signal to
+#'   noise ratio).
 #'   Note that, depending on the peak detection algorithm, the matrix may
 #'   contain additional columns.
 #'   For `XChromatograms` objects the `matrix` contains also columns `"row"`

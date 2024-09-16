@@ -29,8 +29,10 @@ should be performed (only for \code{XChromatograms} objects). It defaults to
 }
 \value{
 If called on a \code{Chromatogram} object, the method returns an \link{XChromatogram}
-object with the identified peaks. See \code{\link[=peaksWithCentWave]{peaksWithCentWave()}} for details on
-the peak matrix content.
+object with the identified peaks. Columns \code{"mz"}, \code{"mzmin"} and \code{"mzmax"} in
+the \code{chromPeaks()} peak matrix provide the mean m/z and the maximum and
+minimum m/z value of the \code{Chromatogram} object. See \code{\link[=peaksWithCentWave]{peaksWithCentWave()}}
+for details on the remaining columns.
 }
 \description{
 \code{findChromPeaks} on a \link{Chromatogram} or \link{MChromatograms} object with a

@@ -451,10 +451,13 @@ chromatographic peak definitions. Parameter \code{rt} allows to specify a
 retention time range for which peaks should be returned along with
 parameter \code{type} that defines how \emph{overlapping} is defined (parameter
 description for details). For \code{XChromatogram} objects the function returns
-a \code{matrix} with columns \code{"rt"} (retention time of the peak apex),
-\code{"rtmin"} (the lower peak boundary), \code{"rtmax"} (the upper peak boundary),
-\code{"into"} (the ingegrated peak signal/area of the peak), \code{"maxo"} (the
-maximum instensity of the peak and \code{"sn"} (the signal to noise ratio).
+a \code{matrix} with columns \code{"mz"} (mean m/z value), \code{"mzmin"} (minimal m/z
+value) and \code{"mzmax"} (maximal m/z value), \code{"rt"} (retention time of the
+peak apex), \code{"rtmin"} (the lower peak boundary in retention time
+dimension), \code{"rtmax"} (the upper peak boundary in retention time
+dimension), \code{"into"} (the ingegrated peak signal/area of the peak),
+\code{"maxo"} (the maximum instensity of the peak and \code{"sn"} (the signal to
+noise ratio).
 Note that, depending on the peak detection algorithm, the matrix may
 contain additional columns.
 For \code{XChromatograms} objects the \code{matrix} contains also columns \code{"row"}

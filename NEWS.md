@@ -8,6 +8,7 @@
 - Fix calculation of the correlation coefficient for peak shape similarity with
   an idealized bell shape (*beta*) during gap filling for centWave-based
   chromatographic peak detection with parameter `verboseBetaColumns = TRUE`.
+- Add `chromPeakSummary` generic (issue #705).
 
 ## Changes in version 4.3.3
 

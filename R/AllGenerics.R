@@ -535,6 +535,35 @@ setGeneric("chromPeakData<-", function(object, value)
 setGeneric("chromPeakSpectra", function(object, ...)
     standardGeneric("chromPeakSpectra"))
 
+#' @title Chromatographic peak summaries
+#'
+#' @name chromPeakSummary
+#'
+#' @description
+#'
+#' The `chromPeakSummary()` method calculates summary statistic or other
+#' metrics for each of the identified chromatographic peaks in an *xcms*
+#' result object, such as the [XcmsExperiment()]. Different metrics can be
+#' calculated, depending (and configured) using dedicated *parameter* classes.
+#' As a result, the method returns a `matrix` or `data.frame` with one row
+#' per chromatographic peak. Each column contains calculated values, depending
+#' on the used method/parameter class.
+#'
+#' Currently implemented methods/parameter classes are:
+#'
+#' @return
+#'
+#' A `matrix` or `data.frame` with the same number of rows as there are
+#' chromatographic peaks. Columns contain the calculated values. The number of
+#' columns, their names and content depend on the used parameter object. See
+#' the respective documentation above for more details.
+#'
+#' @author Pable Vangeenderhuysen, Johannes Rainer
+#'
+#'
+setGeneric("chromPeakSummary", function(object, param, ...)
+           standardGeneric("chromPeakSummary"))
+
 setGeneric("collect", function(object, ...) standardGeneric("collect"))
 setGeneric("consecMissedLimit", function(object, ...)
     standardGeneric("consecMissedLimit"))

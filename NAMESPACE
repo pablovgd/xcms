@@ -530,7 +530,8 @@ exportMethods("hasChromPeaks",
               "featureSpectra",
               "chromPeakSpectra",
               "chromPeakChromatograms",
-              "featureChromatograms"
+              "featureChromatograms",
+              "chromPeakSummary"
               )
 
 ## feature grouping functions and methods.

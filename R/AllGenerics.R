@@ -551,6 +551,15 @@ setGeneric("chromPeakSpectra", function(object, ...)
 #'
 #' Currently implemented methods/parameter classes are:
 #'
+#'
+#' @param object an *xcms* result object containing information on
+#'     identified chromatographic peaks.
+#'
+#' @param param a parameter object defining the method/summaries that should
+#'     be calculated (see description above for supported parameter classes).
+#'
+#' @param ... additional arguments passed to the method implementation.
+#'
 #' @return
 #'
 #' A `matrix` or `data.frame` with the same number of rows as there are

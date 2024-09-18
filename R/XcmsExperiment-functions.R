@@ -520,8 +520,9 @@
             ## consider adding 0 or NA intensity for those.
             mat <- do.call(rbind, xsub)
             if (nrow(mat)) {
+                nr <- vapply(xsub, nrow, NA_integer_)
                 ## can have 0, 1 or x values per rt; repeat rt accordingly
-                rts <- rep(rt[keep], vapply(xsub, nrow, integer(1L)))
+                rts <- rep(rt[keep], nr)
                 maxi <- which.max(mat[, 2L])[1L]
                 mmz <- do.call(mzCenterFun, list(mat[, 1L], mat[, 2L]))
                 if (is.na(mmz)) mmz <- mat[maxi, 1L]
@@ -530,9 +531,11 @@
                     sum(mat[, 2L], na.rm = TRUE) *
                     ((rtr[2L] - rtr[1L]) / max(1L, (length(keep) - 1L)))
                 )
-                if ("beta_cor" %in% cn)
+                if ("beta_cor" %in% cn) {
                     res[i, c("beta_cor", "beta_snr")] <- .get_beta_values(
-                        mat[, 2L], rts)
+                        vapply(xsub[nr > 0], sum, NA_real_),
+                        rt[keep][nr > 0])
+                }
             }
         }
     }

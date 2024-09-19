@@ -533,7 +533,8 @@
                 )
                 if ("beta_cor" %in% cn) {
                     res[i, c("beta_cor", "beta_snr")] <- .get_beta_values(
-                        vapply(xsub[nr > 0], sum, NA_real_),
+                        vapply(xsub[nr > 0], function(z) sum(z[, "intensity"]), 
+                               NA_real_),
                         rt[keep][nr > 0])
                 }
             }
@@ -563,25 +564,16 @@
   colnames(res) <- c("beta_cor","beta_snr")
   for (i in seq_len(nrow(res))) {
     rtr <- peakArea[i, c("rtmin", "rtmax")]
-    keep <- which(MsCoreUtils::between(rt, rtr))
+    keep <- which(between(rt, rtr))
     if (length(keep)) {
       xsub <- lapply(x[keep], .pmat_filter_mz,
                      mzr = peakArea[i, c("mzmin", "mzmax")])
-      ## length of xsub is the number of spectra, the number of peaks can
-      ## however be 0 if no peak was found. Maybe we should/need to
-      ## consider adding 0 or NA intensity for those.
-      mat <- do.call(rbind, xsub)
-      if (nrow(mat)) {
-        nr <- vapply(xsub, nrow, NA_integer_)
-        ## can have 0, 1 or x values per rt; repeat rt accordingly
-        rts <- rep(rt[keep], nr)
-        res[i, c("beta_cor", "beta_snr")] <- .get_beta_values(
-          vapply(xsub[nr > 0], sum, NA_real_),
+      nr <- vapply(xsub, nrow, NA_integer_)
+      res[i, c("beta_cor", "beta_snr")] <- .get_beta_values(
+          vapply(xsub[nr > 0], function(z) sum(z[, "intensity"]), NA_real_),
           rt[keep][nr > 0])
-        
       }
     }
-  }
   res
 }
 

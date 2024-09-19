@@ -533,7 +533,8 @@
                 )
                 if ("beta_cor" %in% cn) {
                     res[i, c("beta_cor", "beta_snr")] <- .get_beta_values(
-                        vapply(xsub[nr > 0], sum, NA_real_),
+                        vapply(xsub[nr > 0], function(z) sum(z[, "intensity"]), 
+                               NA_real_),
                         rt[keep][nr > 0])
                 }
             }
@@ -541,6 +542,42 @@
     }
     res[!is.na(res[, "maxo"]), , drop = FALSE]
 }
+
+
+#' Calculates quality metrics for a chromatographic peak. 
+#'
+#' @param x `list` of peak matrices (from a single MS level and from a single
+#'     file/sample).
+#'
+#' @param rt retention time for each peak matrix.
+#'
+#' @param peakArea `matrix` defining the chrom peak area.
+#'
+#' @author Pablo Vangeenderhuysen
+#'
+#' @noRd
+.chrom_peak_beta_metrics <- function(x, rt, peakArea, ...) {
+  res <- matrix(NA_real_, ncol = 2L, nrow = nrow(peakArea))
+  rownames(res) <- rownames(peakArea)
+  colnames(res) <- c("beta_cor","beta_snr")
+  for (i in seq_len(nrow(res))) {
+    rtr <- peakArea[i, c("rtmin", "rtmax")]
+    keep <- which(between(rt, rtr))
+    if (length(keep)) {
+      xsub <- lapply(x[keep], .pmat_filter_mz,
+                     mzr = peakArea[i, c("mzmin", "mzmax")])
+      nr <- vapply(xsub, nrow, NA_integer_)
+      res[i, c("beta_cor", "beta_snr")] <- .get_beta_values(
+          vapply(xsub[nr > 0], function(z) sum(z[, "intensity"]), NA_real_),
+          rt[keep][nr > 0])
+      }
+    }
+  res
+}
+
+
+
+
 
 #' Difference to the original code is that the weighted mean is also calculated
 #' if some of the peak intensities in the profile matrix are 0

@@ -567,7 +567,7 @@ setGeneric("chromPeakSpectra", function(object, ...)
 #' columns, their names and content depend on the used parameter object. See
 #' the respective documentation above for more details.
 #'
-#' @author Pable Vangeenderhuysen, Johannes Rainer
+#' @author Pablo Vangeenderhuysen, Johannes Rainer
 #'
 #'
 setGeneric("chromPeakSummary", function(object, param, ...)

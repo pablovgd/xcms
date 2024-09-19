@@ -556,9 +556,7 @@
 #' @author Pablo Vangeenderhuysen
 #'
 #' @noRd
-.chrom_peak_beta_metrics <- function(x, rt, peakArea,
-                                           sampleIndex = integer(),
-                                           cn = character(), ...) {
+.chrom_peak_beta_metrics <- function(x, rt, peakArea, ...) {
   res <- matrix(NA_real_, ncol = 2L, nrow = nrow(peakArea))
   rownames(res) <- rownames(peakArea)
   colnames(res) <- c("beta_cor","beta_snr")

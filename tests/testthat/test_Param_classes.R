@@ -1002,3 +1002,12 @@ test_that("FilterIntensityParam works", {
     res@threshold <- c(10, 20)
     expect_error(validObject(res), "length 1")
 })
+
+
+test_that("BetaDistributionParam works", {
+  skip_on_os(os = "windows", arch = "i386")
+  
+  res <- BetaDistributionParam()
+  expect_true(is(res, "BetaDistributionParam "))
+  
+})

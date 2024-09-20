@@ -2013,3 +2013,44 @@ setMethod(
         object[i = sort(unique(file)), keepAdjustedRtime = keepAdjustedRtime,
                keepFeatures = keepFeatures, ...]
     })
+
+#' @rdname chromPeakSummary
+setMethod(
+  "chromPeakSummary",
+  signature(object = "XcmsExperiment", param = "BetaDistributionParam"),
+  function(object, param, msLevel = 1L, chunkSize = 2L, BPPARAM = bpparam()) {
+    if (length(msLevel) != 1)
+      stop("Can only perform peak metrics for one MS level at a time.")
+    if (!hasChromPeaks(object, msLevel = msLevel))
+      stop("No ChromPeaks definitions for MS level ", msLevel, " present.")
+    ## Define region to calculate metrics from for each file
+    cp <- chromPeaks(object)
+    f <- factor(cp[,"sample"],seq_along(object))
+    pal <- split.data.frame(cp[,c("mzmin","mzmax","rtmin","rtmax")],f)
+    names(pal) <- seq_along(pal)
+    ## Get integration function and other info.
+    ph <- .xmse_process_history(object, .PROCSTEP.PEAK.DETECTION,
+                                msLevel = msLevel)
+    ## Manual chunk processing because we have to split `object` and `pal`
+    idx <- seq_along(object)
+    chunks <- split(idx, ceiling(idx / chunkSize))
+    pb <- progress::progress_bar$new(format = paste0("[:bar] :current/:",
+                                           "total (:percent) in ",
+                                           ":elapsed"),
+                           total = length(chunks) + 1L, clear = FALSE)
+    pb$tick(0)
+    mzf <- "wMean"
+    res <- lapply(chunks, function(z, ...) {
+      pb$tick()
+      .xmse_integrate_chrom_peaks(
+        .subset_xcms_experiment(object, i = z, keepAdjustedRtime = TRUE,
+                                ignoreHistory = TRUE),
+        pal = pal[z], intFun = .chrom_peak_beta_metrics, mzCenterFun = mzf,
+        param = BetaDistributionParam(), BPPARAM = BPPARAM)
+    })
+    res <- do.call(rbind, res)
+    object@chromPeaks <- cbind(object@chromPeaks, res)
+    pb$tick()
+    validObject(object)
+    object
+  })

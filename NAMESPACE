@@ -461,7 +461,8 @@ export("CentWaveParam",
        "CleanPeaksParam",
        "MergeNeighboringPeaksParam",
        "FilterIntensityParam",
-       "ChromPeakAreaParam")
+       "ChromPeakAreaParam",
+       "BetaDistributionParam")
 ## Param class methods.
 
 ## New Classes

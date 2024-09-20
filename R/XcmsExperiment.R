@@ -2028,29 +2028,23 @@ setMethod(
     f <- factor(cp[,"sample"],seq_along(object))
     pal <- split.data.frame(cp[,c("mzmin","mzmax","rtmin","rtmax")],f)
     names(pal) <- seq_along(pal)
-    ## Get integration function and other info.
-    ph <- .xmse_process_history(object, .PROCSTEP.PEAK.DETECTION,
-                                msLevel = msLevel)
     ## Manual chunk processing because we have to split `object` and `pal`
     idx <- seq_along(object)
     chunks <- split(idx, ceiling(idx / chunkSize))
-    pb <- progress::progress_bar$new(format = paste0("[:bar] :current/:",
+    pb <- progress_bar$new(format = paste0("[:bar] :current/:",
                                            "total (:percent) in ",
                                            ":elapsed"),
                            total = length(chunks) + 1L, clear = FALSE)
     pb$tick(0)
-    mzf <- "wMean"
+    # mzf <- "wMean"
     res <- lapply(chunks, function(z, ...) {
       pb$tick()
       .xmse_integrate_chrom_peaks(
         .subset_xcms_experiment(object, i = z, keepAdjustedRtime = TRUE,
                                 ignoreHistory = TRUE),
-        pal = pal[z], intFun = .chrom_peak_beta_metrics, mzCenterFun = mzf,
-        param = BetaDistributionParam(), BPPARAM = BPPARAM)
+        pal = pal[z], intFun = .chrom_peak_beta_metrics, BPPARAM = BPPARAM)
     })
     res <- do.call(rbind, res)
-    object@chromPeaks <- cbind(object@chromPeaks, res)
     pb$tick()
-    validObject(object)
-    object
+    res
   })

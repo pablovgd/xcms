@@ -1457,6 +1457,9 @@ test_that("chromPeakSummary,XcmsExperiment works", {
   p <- CentWaveParam(noise = 10000, snthresh = 40, prefilter = c(3, 10000),
                      verboseBetaColumns = FALSE)
   xmse <- findChromPeaks(mse, param = p)
-  res <- chromPeakSummary(res,BetaDistributionParam())
-  expect_true(all(c("beta_cor", "beta_snr") %in% colnames(chromPeaks(res))))
+  mat <- chromPeakSummary(xmse,BetaDistributionParam())
+  expect_true(all(c("beta_cor", "beta_snr") %in% colnames(res))).
+  expect_true(is.numeric(mat))
+  
 })
+

@@ -1452,3 +1452,14 @@ test_that("fillChromPeaks,XcmsExperiment works with verboseBetaColumns", {
     pks_fil <- chromPeaks(res)[chromPeakData(res)$is_filled, ]
     expect_true(sum(is.na(pks_fil[, "beta_cor"])) < 4)
 })
+
+test_that("chromPeakSummary,XcmsExperiment works", {
+  p <- CentWaveParam(noise = 10000, snthresh = 40, prefilter = c(3, 10000),
+                     verboseBetaColumns = FALSE)
+  xmse <- findChromPeaks(mse, param = p)
+  mat <- chromPeakSummary(xmse,BetaDistributionParam())
+  expect_true(all(c("beta_cor", "beta_snr") %in% colnames(res))).
+  expect_true(is.numeric(mat))
+  
+})
+

@@ -9,6 +9,8 @@
   an idealized bell shape (*beta*) during gap filling for centWave-based
   chromatographic peak detection with parameter `verboseBetaColumns = TRUE`.
 - Add `chromPeakSummary` generic (issue #705).
+- Add `chromPeakSummary()` method to calculate the *beta* quality metrics.
+
 
 ## Changes in version 4.3.3
 

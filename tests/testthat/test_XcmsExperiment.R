@@ -831,11 +831,11 @@ test_that(".chrom_peak_beta_metrics works", {
   x <- Spectra::peaksData(spectra(xmse[2L]))
   rt <- rtime(spectra(xmse[2L]))
   pks <- chromPeaks(xmse)[chromPeaks(xmse)[, "sample"] == 2L, ]
-  
+
   res <- .chrom_peak_beta_metrics(x, rt, pks, sampleIndex = 2L,
                                         cn = colnames(pks))
   expect_equal(nrow(res), nrow(pks))
- 
+
 })
 
 ## That's from XcmsExperiment-functions.R
@@ -1458,8 +1458,6 @@ test_that("chromPeakSummary,XcmsExperiment works", {
                      verboseBetaColumns = FALSE)
   xmse <- findChromPeaks(mse, param = p)
   mat <- chromPeakSummary(xmse,BetaDistributionParam())
-  expect_true(all(c("beta_cor", "beta_snr") %in% colnames(res))).
+  expect_true(all(c("beta_cor", "beta_snr") %in% colnames(mat)))
   expect_true(is.numeric(mat))
-  
 })
-

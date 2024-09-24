@@ -2024,11 +2024,11 @@ setMethod(
     if (!hasChromPeaks(object, msLevel = msLevel))
       stop("No ChromPeaks definitions for MS level ", msLevel, " present.")
     ## Define region to calculate metrics from for each file
-    cp <- chromPeaks(object)
-    f <- factor(cp[,"sample"],seq_along(object))
-    pal <- split.data.frame(cp[,c("mzmin","mzmax","rtmin","rtmax")],f)
+    cp <- chromPeaks(object, msLevel = msLevel)
+    f <- factor(cp[,"sample"], seq_along(object))
+    pal <- split.data.frame(cp[, c("mzmin", "mzmax", "rtmin", "rtmax")], f)
     names(pal) <- seq_along(pal)
-    ## Manual chunk processing because we have to split `object` and `pal`
+    ## Manual chunk processi ng because we have to split `object` and `pal`
     idx <- seq_along(object)
     chunks <- split(idx, ceiling(idx / chunkSize))
     pb <- progress_bar$new(format = paste0("[:bar] :current/:",
@@ -2042,7 +2042,8 @@ setMethod(
       .xmse_integrate_chrom_peaks(
         .subset_xcms_experiment(object, i = z, keepAdjustedRtime = TRUE,
                                 ignoreHistory = TRUE),
-        pal = pal[z], intFun = .chrom_peak_beta_metrics, BPPARAM = BPPARAM)
+        pal = pal[z], intFun = .chrom_peak_beta_metrics,
+        msLevel = msLevel, BPPARAM = BPPARAM)
     })
     res <- do.call(rbind, res)
     pb$tick()

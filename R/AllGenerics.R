@@ -551,6 +551,18 @@ setGeneric("chromPeakSpectra", function(object, ...)
 #'
 #' Currently implemented methods/parameter classes are:
 #'
+#' - `BetaDistributionParam`: calculates the *beta_cor* and *beta_snr* quality
+#'   metrics as described in (Kumler 2023) representing the result from a
+#'   (correlation) test of similarity to a bell curve and the signal-to-noise
+#'   ratio calculated on the residulas of this test.
+#'
+#' @param BPPARAM Parallel processing setup. See [bpparam()] for details.
+#'
+#' @param chunkSize `integer(1)` defining the number of samples from which data
+#'     should be loaded and processed at a time.
+#'
+#' @param msLevel `integer(1)` with the MS level of the chromatographic peaks
+#'     on which the metric should be calculated.
 #'
 #' @param object an *xcms* result object containing information on
 #'     identified chromatographic peaks.
@@ -569,7 +581,15 @@ setGeneric("chromPeakSpectra", function(object, ...)
 #'
 #' @author Pablo Vangeenderhuysen, Johannes Rainer
 #'
+#' @md
 #'
+#' @references
+#'
+#' Kumler W, Hazelton B J and Ingalls A E (2023) "Picky with peakpicking:
+#' assessing chromatographic peak quality with simple metrics in metabolomics"
+#' *BMC Bioinformatics* 24(1):404. doi: 10.1186/s12859-023-05533-4
+#'
+#' @export
 setGeneric("chromPeakSummary", function(object, param, ...)
            standardGeneric("chromPeakSummary"))
 

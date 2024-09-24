@@ -1005,9 +1005,6 @@ test_that("FilterIntensityParam works", {
 
 
 test_that("BetaDistributionParam works", {
-  skip_on_os(os = "windows", arch = "i386")
-  
   res <- BetaDistributionParam()
-  expect_true(is(res, "BetaDistributionParam "))
-  
+  expect_true(is(res, "BetaDistributionParam"))
 })
